@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পয়েন্ট ক্যালকুলেটর</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.1/dist/tailwind.min.css" rel="stylesheet">
+    <!-- DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+        <h1 class="text-2xl font-semibold mb-6 text-center">পয়েন্ট ক্যালকুলেটর</h1>
+        <form id="calculator-form" class="space-y-6">
+            <!-- Player 1 -->
+            <div class="flex flex-col space-y-4">
+                <label class="form-control">
+                    <span class="label-text">খেলোয়াড় ১ এর নাম:</span>
+                    <input type="text" id="playerName1" placeholder="Enter Your Name"
+                        class="input input-bordered w-full" required />
+                </label>
+
+                <!-- Player 2 -->
+                <label class="form-control">
+                    <span class="label-text">খেলোয়াড় ২ এর নাম:</span>
+                    <input type="text" id="playerName2" placeholder="Enter Your Name"
+                        class="input input-bordered w-full" required />
+                </label>
+
+                <!-- Player 3 -->
+                <label class="form-control">
+                    <span class="label-text">খেলোয়াড় ৩ এর নাম:</span>
+                    <input type="text" id="playerName3" placeholder="Enter Your Name"
+                        class="input input-bordered w-full" required />
+                </label>
+
+                <!-- Player 4 -->
+                <label class="form-control">
+                    <span class="label-text">খেলোয়াড় ৪ এর নাম:</span>
+                    <input type="text" id="playerName4" placeholder="Enter Your Name"
+                        class="input input-bordered w-full" required />
+                </label>
+            </div>
+
+            <div class="flex justify-between">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" id="clear-button" class="btn btn-secondary">মুছুন</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('calculator-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Gather player names
+            const playerNames = [
+                document.getElementById('playerName1').value,
+                document.getElementById('playerName2').value,
+                document.getElementById('playerName3').value,
+                document.getElementById('playerName4').value
+            ];
+
+            // Store player names in localStorage
+            localStorage.setItem('playerNames', JSON.stringify(playerNames));
+
+            // Redirect to the result page
+            window.location.href = 'result.html';
+        });
+
+        document.getElementById('clear-button').addEventListener('click', function () {
+            document.getElementById('calculator-form').reset(); // Reset the form
+        });
+    </script>
+</body>
+
+</html>
