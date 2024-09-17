@@ -19,30 +19,42 @@
     <section class="flex text-center gap-4 w-[100%] justify-between mx-auto sm:w-3/4" id="sec1">
         <!-- div 1 -->
         <div class="mt-24" id="lb1">
-            <h1 id="h1" class="text-xl font-bold">Ferdous</h1>
+            <h1 id="h1" class="text-xl font-bold"></h1>
             <label>
-                <input id="sum1" type="text" placeholder="" />
+                <input class="text-center" id="total-1" placeholder="Total" value="0" />
+            </label>
+            <label>
+                <input class="px-2 text-center" id="sum1" type="text" placeholder="Enter " />
             </label>
         </div>
         <!-- div 2 -->
         <div class="mt-24" id="lb2">
-            <h1 id="h2" class="text-xl font-bold">Sumon</h1>
+            <h1 id="h2" class="text-xl font-bold"></h1>
             <label>
-                <input id="sum2" type="text" placeholder="" />
+                <input class="text-center" id="total-2" placeholder="Total" value="0" />
+            </label>
+            <label>
+                <input class="text-center" id="sum2" type="text" placeholder="Enter" />
             </label>
         </div>
         <!-- div 3 -->
         <div class="mt-24" id="lb3">
-            <h1 id="h3" class="text-xl font-bold">Jony</h1>
+            <h1 id="h3" class="text-xl font-bold"></h1>
             <label>
-                <input id="sum3" type="text" placeholder="" />
+                <input class="text-center" id="total-3" placeholder="Total" value="0" />
+            </label>
+            <label>
+                <input class="text-center" id="sum3" type="text" placeholder="Enter " />
             </label>
         </div>
         <!-- div 4 -->
         <div class="mt-24" id="lb4">
-            <h1 id="h4" class="text-xl font-bold">Fahad</h1>
+            <h1 id="h4" class="text-xl font-bold"></h1>
             <label>
-                <input id="sum4" type="text" placeholder="" />
+                <input class="text-center" id="total-4" placeholder="Total" value="0" />
+            </label>
+            <label>
+                <input class="text-center" id="sum4" type="text" placeholder="Enter " />
             </label>
         </div>
     </section>
@@ -55,31 +67,50 @@
     </div>
 
     <script>
-        // When the DOM is loaded, update the player names from localStorage
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve stored input values from localStorage
             const inputData1 = localStorage.getItem('inputData1');
             const inputData2 = localStorage.getItem('inputData2');
             const inputData3 = localStorage.getItem('inputData3');
             const inputData4 = localStorage.getItem('inputData4');
 
-            const h1 = document.getElementById('h1');
-            const h2 = document.getElementById('h2');
-            const h3 = document.getElementById('h3');
-            const h4 = document.getElementById('h4');
-
-            if (h1) h1.innerText = inputData1 || 'Player 1';
-            if (h2) h2.innerText = inputData2 || 'Player 2';
-            if (h3) h3.innerText = inputData3 || 'Player 3';
-            if (h4) h4.innerText = inputData4 || 'Player 4';
+            // Set the values to the respective <h1> elements
+            document.getElementById('h1').innerText = inputData1 || 'Player 1';
+            document.getElementById('h2').innerText = inputData2 || 'Player 2';
+            document.getElementById('h3').innerText = inputData3 || 'Player 3';
+            document.getElementById('h4').innerText = inputData4 || 'Player 4';
         });
-
         // Event listener for the UPDATE button
         document.getElementById('doSum').addEventListener('click', function () {
-            // Get input values from each player
-            const sum1 = document.getElementById('sum1').value;
-            const sum2 = document.getElementById('sum2').value;
-            const sum3 = document.getElementById('sum3').value;
-            const sum4 = document.getElementById('sum4').value;
+            // Get input values from each player's sum field and convert them to numbers
+            const sum1 = parseFloat(document.getElementById('sum1').value) || 0;
+            const sum2 = parseFloat(document.getElementById('sum2').value) || 0;
+            const sum3 = parseFloat(document.getElementById('sum3').value) || 0;
+            const sum4 = parseFloat(document.getElementById('sum4').value) || 0;
+
+            // Get current total values from each player's total field and convert them to numbers
+            const total1 = parseFloat(document.getElementById('total-1').value) || 0;
+            const total2 = parseFloat(document.getElementById('total-2').value) || 0;
+            const total3 = parseFloat(document.getElementById('total-3').value) || 0;
+            const total4 = parseFloat(document.getElementById('total-4').value) || 0;
+
+            // Calculate new totals by adding the sum to the current total
+            const finalTotal1 = total1 + sum1;
+            const finalTotal2 = total2 + sum2;
+            const finalTotal3 = total3 + sum3;
+            const finalTotal4 = total4 + sum4;
+
+            // Update the total input fields with the new totals
+            document.getElementById('total-1').value = finalTotal1;
+            document.getElementById('total-2').value = finalTotal2;
+            document.getElementById('total-3').value = finalTotal3;
+            document.getElementById('total-4').value = finalTotal4;
+
+            // Clear the sum input fields after updating the totals
+            document.getElementById('sum1').value = '';
+            document.getElementById('sum2').value = '';
+            document.getElementById('sum3').value = '';
+            document.getElementById('sum4').value = '';
 
             // Clear previous values and append new values to each div
             const lb1 = document.getElementById("lb1");
@@ -87,13 +118,7 @@
             const lb3 = document.getElementById("lb3");
             const lb4 = document.getElementById("lb4");
 
-            // // Remove any existing paragraphs
-            // lb1.querySelectorAll('p').forEach(p => p.remove());
-            // lb2.querySelectorAll('p').forEach(p => p.remove());
-            // lb3.querySelectorAll('p').forEach(p => p.remove());
-            // lb4.querySelectorAll('p').forEach(p => p.remove());
-
-            // Create and append new paragraphs with updated values
+            // Create and append new paragraphs with updated total values before the labels
             const p1 = document.createElement('p');
             const p2 = document.createElement('p');
             const p3 = document.createElement('p');
@@ -104,19 +129,15 @@
             p3.innerText = sum3;
             p4.innerText = sum4;
 
-            lb1.appendChild(p1);
-            lb2.appendChild(p2);
-            lb3.appendChild(p3);
-            lb4.appendChild(p4);
-        });
-        document.getElementById('doSum').addEventListener('click', function () {
-
-            const sum1 = document.getElementById('sum1').value;
-            const p1 = document.createElement('p').value;
-            const result = sum1 + p1;
-            console.log(result);
+            lb1.insertBefore(p1, lb1.querySelector('label'));
+            lb2.insertBefore(p2, lb2.querySelector('label'));
+            lb3.insertBefore(p3, lb3.querySelector('label'));
+            lb4.insertBefore(p4, lb4.querySelector('label'));
         });
     </script>
+
+
+</body>
 
 </body>
 

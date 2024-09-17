@@ -1,0 +1,41 @@
+ <script>
+        // Event listener for the UPDATE button
+        document.getElementById('doSum').addEventListener('click', function () {
+            // Get input values from each player
+            const sum1 = document.getElementById('sum1').value || "00";
+            const sum2 = document.getElementById('sum2').value || "00";
+            const sum3 = document.getElementById('sum3').value || "00";
+            const sum4 = document.getElementById('sum4').value || "00";
+
+            // Ensure values are set to "00" if they are empty or "00"
+            const finalSum1 = sum1 === "" || sum1 === "00" ? "00" : sum1;
+            const finalSum2 = sum2 === "" || sum2 === "00" ? "00" : sum2;
+            const finalSum3 = sum3 === "" || sum3 === "00" ? "00" : sum3;
+            const finalSum4 = sum4 === "" || sum4 === "00" ? "00" : sum4;
+
+            // Clear previous values and append new values to each div
+            const lb1 = document.getElementById("lb1");
+            const lb2 = document.getElementById("lb2");
+            const lb3 = document.getElementById("lb3");
+            const lb4 = document.getElementById("lb4");
+
+            // Create and append new paragraphs with updated values before the label
+            const p1 = document.createElement('p');
+            const p2 = document.createElement('p');
+            const p3 = document.createElement('p');
+            const p4 = document.createElement('p');
+
+            p1.innerText = finalSum1;
+            p2.innerText = finalSum2;
+            p3.innerText = finalSum3;
+            p4.innerText = finalSum4;
+
+            // Insert new <p> elements before the labels
+            lb1.insertBefore(p1, lb1.querySelector('label'));
+            lb2.insertBefore(p2, lb2.querySelector('label'));
+            lb3.insertBefore(p3, lb3.querySelector('label'));
+            lb4.insertBefore(p4, lb4.querySelector('label'));
+        });
+    </script>
+
+</body>
